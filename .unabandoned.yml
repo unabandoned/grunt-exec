@@ -1,0 +1,31 @@
+schema: 1
+
+package: "@unabandoned/grunt-exec"
+
+upstream:
+  repo: jharding/grunt-exec
+  reason: "no release since 3.0.0 in July 2017; the repository has had no commits on master since"
+
+summary: >-
+  Grunt multi-task that runs shell commands through child_process.spawn or
+  spawnSync, with exit-code, stdio, cwd and callback options.
+
+why-forked: >-
+  CyberChef's Gruntfile runs its config generation, sitemap, node-consumer
+  and browser-test steps through exec targets. The package has no runtime
+  dependencies, but it declares grunt as a peer and Renovate flags it as
+  abandoned on CyberChef's dashboard, so the org owns it rather than
+  silencing it. tasks/exec.js is unchanged from 3.0.0; the jshint/Travis
+  tooling is replaced with node:test.
+
+used-by:
+  - consumer: TheTechNetwork/CyberChef
+    purpose: >-
+      the exec:* targets in Gruntfile.js (generateConfig, generateNodeIndex,
+      sitemap, setupNodeConsumers, testCJSNodeConsumer, testESMNodeConsumer,
+      teardownNodeConsumers, browserTests, fixCryptoApiImports,
+      fixSnackbarMarkup, repoSize, cleanGit)
+
+status: active
+
+tags: [grunt, gruntplugin, build, shell, exec]

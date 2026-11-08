@@ -1,3 +1,9 @@
+'use strict';
+
+var path = require('node:path');
+
+// Run by test/helpers/grunt.js with --base set to a temporary directory, so
+// every relative path below (and every command's default cwd) is inside it.
 module.exports = function(grunt) {
   grunt.initConfig({
     exec: {
@@ -63,8 +69,51 @@ module.exports = function(grunt) {
       sync: true,
       shell: true
     }
+
+    // Fork additions: the option combinations TheTechNetwork/CyberChef uses,
+    // and the failure paths upstream's suite never exercised.
+    , fail_exit: 'node -e "process.exit(3);"'
+    , missing_command: { stdout: true }
+    , loud: 'echo stdout-marker && node -e "console.error(\'stderr-marker\');"'
+    , quiet_stdout: {
+        cmd: 'echo stdout-marker'
+      , stdout: false
+      }
+    , quiet_stderr: {
+        cmd: 'node -e "console.error(\'stderr-marker\');"'
+      , stderr: false
+      }
+    , sync_redirect: {
+        cmd: 'node -e "console.log(\'sync redirect\');" > sync.txt'
+      , sync: true
+      }
+    , chained: {
+        cmd: 'echo one> chained.txt; echo two>> chained.txt'
+      , sync: true
+      }
+    , in_cwd: {
+        cmd: 'echo in cwd> cwd.txt'
+      , cwd: 'sub'
+      }
+    , callback_args: {
+        cmd: 'echo callback output'
+      , callbackArgs: ['first', 'second']
+      , callback: function(error, stdout, stderr, args) {
+          require('fs').writeFileSync('callback.json', JSON.stringify({
+            error: error, stdout: stdout, args: args
+          }));
+        }
+      }
+    , callback_failure: {
+        cmd: 'node -e "process.exit(4);"'
+      , callback: function(error) {
+          require('fs').writeFileSync('failure.json', JSON.stringify({
+            message: error && error.message, code: error && error.code
+          }));
+        }
+      }
     }
   });
 
-  grunt.loadTasks('../tasks');
+  grunt.loadTasks(path.join(__dirname, '..', 'tasks'));
 };
