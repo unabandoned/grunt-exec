@@ -1,11 +1,17 @@
-[![build status](https://secure.travis-ci.org/jharding/grunt-exec.png?branch=master)](http://travis-ci.org/jharding/grunt-exec)
 grunt-exec
 ==========
 
 Grunt plugin for executing shell commands.
 
-[![NPM](https://nodei.co/npm/grunt-exec.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/grunt-exec/)
-[![NPM](https://nodei.co/npm-dl/grunt-exec.png)](https://nodei.co/npm/grunt-exec/)
+> **This is a maintained fork of [grunt-exec][upstream], published as
+> [`@unabandoned/grunt-exec`][pkg].** Upstream's last release was 3.0.0 in
+> July 2017. The task name (`exec`), its options and `tasks/exec.js` are
+> unchanged from 3.0.0, and the package still has no runtime dependencies;
+> only the dev tooling and tests are new. Requires Node.js 22.12 or newer.
+> See [.unabandoned.yml](.unabandoned.yml).
+
+[upstream]: https://github.com/jharding/grunt-exec
+[pkg]: https://www.npmjs.com/package/@unabandoned/grunt-exec
 
 Installation
 ------------
@@ -13,8 +19,11 @@ Installation
 Install grunt-exec using npm:
 
 ```
-$ npm install grunt-exec --save-dev
+$ npm install grunt-exec@npm:@unabandoned/grunt-exec --save-dev
 ```
+
+Installing it under the alias keeps the `grunt.loadNpmTasks('grunt-exec')` line
+below working unchanged.
 
 Then add this line to your project's *Gruntfile.js*:
 
@@ -150,7 +159,7 @@ Issues
 
 Found a bug? Create an issue on GitHub.
 
-https://github.com/jharding/grunt-exec/issues
+https://github.com/unabandoned/grunt-exec/issues
 
 Versioning
 ----------

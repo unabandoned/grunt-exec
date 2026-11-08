@@ -1,8 +1,8 @@
 {
-  "name": "grunt-exec",
+  "name": "@unabandoned/grunt-exec",
   "description": "Grunt task for executing shell commands.",
   "version": "3.0.0",
-  "homepage": "https://github.com/jharding/grunt-exec",
+  "homepage": "https://github.com/unabandoned/grunt-exec#readme",
   "author": {
     "name": "Jake Harding",
     "email": "jacob.s.harding@gmail.com"
@@ -12,26 +12,36 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/jharding/grunt-exec.git"
+    "url": "git+https://github.com/unabandoned/grunt-exec.git"
   },
   "bugs": {
-    "url": "https://github.com/jharding/grunt-exec/issues"
+    "url": "https://github.com/unabandoned/grunt-exec/issues"
   },
   "license": "MIT",
-  "main": "Gruntfile.js",
+  "main": "tasks/exec.js",
   "engines": {
-    "node": ">=0.8.0"
+    "node": ">=22.12"
   },
   "scripts": {
-    "test": "node test/test.js"
+    "test": "node --test test/*_test.js",
+    "prepare": "git config core.hooksPath .githooks || true"
   },
   "peerDependencies": {
     "grunt": ">=0.4"
   },
   "devDependencies": {
-    "grunt": "^1.0.0",
-    "grunt-contrib-jshint": "^1.1.0"
+    "@commitlint/cli": "21.2.4",
+    "@commitlint/config-conventional": "21.2.4",
+    "grunt": "1.6.3"
   },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "files": [
+    "tasks",
+    "LICENSE-MIT"
+  ],
   "keywords": [
     "grunt",
     "gruntplugin",
